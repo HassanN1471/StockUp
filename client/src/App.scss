@@ -1,0 +1,22 @@
+@import './Partials/variables';
+@import './Partials/mixins';
+
+.App{
+    box-sizing: border-box;
+    text-decoration: none;
+    color: $paragraph-text;
+    @include paragraph-mobile;
+    @include tablet{
+        @include paragraph;
+    }
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    font-family: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
