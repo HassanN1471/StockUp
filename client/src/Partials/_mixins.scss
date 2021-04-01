@@ -1,0 +1,86 @@
+@import './variables';
+
+//text styles
+//desktop and tablet styles
+@mixin hero-header{
+    font-weight: 700;
+    font-size: calc(1rem + 5vw);
+    line-height: calc(1rem + 7vw);
+}
+
+@mixin header_1{
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    font-weight: 700;
+}
+
+@mixin header_2{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+
+@mixin subheader{
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+}
+
+@mixin paragraph{
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+@mixin contact-info{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@mixin label{
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    color: $text-label-style;
+    font-weight: 500;
+}
+
+//mobile styles
+@mixin header-mobile{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+@mixin subheader-mobile{
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 500;
+}
+@mixin paragraph-mobile{
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+}
+
+//mixin for different screen sizes
+@mixin tablet {
+  @media screen and (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+//setup flexbox
+@mixin setup-flex($direction, $wrap) {
+    display: flex;
+    flex-flow: $direction $wrap;
+}
+
+//divider border style
+@mixin divider {
+    border-bottom: 1px solid $text-field-border;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}

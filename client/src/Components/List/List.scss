@@ -1,0 +1,47 @@
+@import '../../Partials/variables';
+@import '../../Partials/mixins';
+
+.list{
+    @include setup-flex(column,nowrap);
+    padding: 1rem;
+    &-item{
+        width: 100%;
+        box-shadow: 0 3px 5px 0 rgba($color: #000000, $alpha: 0.15);
+        border-radius: 1rem;
+        border: 1px solid rgba($color: #000000, $alpha: 0.15);
+        display: flex;
+        margin: 1rem 0;
+
+        &__symbol{
+            display: flex;
+            flex: 1;
+            padding: 1.25rem 3rem;
+        }
+
+        &__container{
+            @include setup-flex(column,nowrap);
+            flex: 2;
+            padding: 1.25rem 3rem 0.25rem 0;
+        }
+
+        &__box{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            padding-bottom: 1rem;
+        }
+
+        &__change{
+            text-align: right;
+            min-width: 4rem;
+            &--pos{
+                color: $primary-green;
+            }
+            &--neg{
+                color: $primary-red;
+            }
+        }
+
+    }
+}
