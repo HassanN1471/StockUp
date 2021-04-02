@@ -1,0 +1,7 @@
+@import '../../Partials/variables';
+@import '../../Partials/mixins';
+
+.stock{
+    @include setup-flex(column,nowrap);
+    width: 100%;
+}

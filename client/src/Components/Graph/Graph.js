@@ -8,27 +8,20 @@ const Graph = (props) => {
     let ohlc = [],
         volume = [],
         dataLength = data.length,
-        groupingUnits = [
-            [
-                "week", // unit name
-                [1] // allowed multiples
-            ],
-            ["month", [1, 2, 3, 4, 6]]
-        ],
-        i = 0;
+        groupingUnits = [["day", [1]]], i = 0;
 
     for (i; i < dataLength; i += 1) {
         ohlc.push([
-            data[i][0], // the date
-            data[i][1], // open
-            data[i][2], // high
-            data[i][3], // low
-            data[i][4] // close
+            data[i][0], //date
+            data[i][1], //open
+            data[i][2], //high
+            data[i][3], //low
+            data[i][4] //close
         ]);
 
         volume.push([
-            data[i][0], // the date
-            data[i][5] // the volume
+            data[i][0], //date
+            data[i][5] //volume
         ]);
     }
     const timezone = new Date().getTimezoneOffset()
@@ -36,12 +29,25 @@ const Graph = (props) => {
     Highcharts.setOptions({
         global: {
             timezoneOffset: timezone
-        }
+        },
+        plotOptions: {
+            candlestick: {
+                color: '#f72121',//red
+                upColor: '#19be87'//green
+            }
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                minute: '%I:%M %p',
+                hour: '%I %p',
+            }
+        },
     });
 
     const options = {
         rangeSelector: {
-            enabled:false
+            enabled: false
         },
 
         navigator: {
@@ -60,10 +66,11 @@ const Graph = (props) => {
             {
                 labels: {
                     align: "right",
-                    x: -3
+                    x: -3,
                 },
+                offset: 25,
                 title: {
-                    text: "Close"
+                    text: "OHLC"
                 },
                 height: "60%",
                 lineWidth: 2,
@@ -76,12 +83,12 @@ const Graph = (props) => {
                     align: "right",
                     x: -3
                 },
+                offset: 25,
                 title: {
                     text: "Volume"
                 },
                 top: "65%",
                 height: "35%",
-                offset: 0,
                 lineWidth: 2
             }
         ],
@@ -116,13 +123,11 @@ const Graph = (props) => {
     };
 
     return (
-        <div>
-            <HighchartsReact
-                highcharts={Highcharts}
-                constructorType={"stockChart"}
-                options={options}
-            />
-        </div>
+        <HighchartsReact
+            highcharts={Highcharts}
+            constructorType={"stockChart"}
+            options={options}
+        />
     );
 }
 

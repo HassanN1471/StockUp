@@ -19,7 +19,7 @@ class List extends Component {
     componentDidMount() {
         axios.post(`http://localhost:8080/list`, {
             symbols: `FB','AAPL','AMZN','NFLX','GOOG'`,
-            interval:this.state.interval
+            interval: this.state.interval
         })
             .then(({ data }) => {
 
@@ -89,8 +89,9 @@ class List extends Component {
         if (!this.state.filteredData) return <h1>loading...</h1>;
 
         return (
-            <div className='list__form'>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
+            <section className='list'>
+                <h1 className='list__header'>List</h1>
+                <form className='list__form' onSubmit={(e) => this.handleSubmit(e)}>
                     <label htmlFor='interval' className='list__label'>Category</label>
                     <select
                         id="interval"
@@ -105,10 +106,10 @@ class List extends Component {
                         <option value="30">30 min</option>
                         <option value="60">1 hr</option>
                         <option value="120">2 hr</option>
-                        <option value="320">4 hr</option>
-                        <option value="480">8 hr</option>
+                        {/* <option value="320">4 hr</option>
+                        <option value="480">8 hr</option> */}
                     </select>
-                    <label htmlFor='change' className='list__label'>change</label>
+                    <label htmlFor='change' className='list__label'>set min % change</label>
                     <input
                         id="change"
                         name="change"
@@ -119,10 +120,10 @@ class List extends Component {
                     <input className="list__button button" type="submit" value="SUBMIT" />
                 </form>
 
-                {this.state.filteredData.map(item => {
-                    return <ListItem data={item} />
+                {this.state.filteredData.map((item,i) => {
+                    return <ListItem data={item} key={i}/>
                 })}
-            </div>
+            </section>
         );
     }
 }

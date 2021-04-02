@@ -7,7 +7,7 @@ function ListItem(props) {
                 {data.map(item => {
                     let changeClass = item.change > 0 ? "list-item__change--pos" : "list-item__change--neg"
                     return (
-                        <div className="list-item__box">
+                        <div className="list-item__box" key={`${symbol}${item.change}${item.interval}`}>
                             <p className={`list-item__change ${changeClass}`}>{item.change}%</p>
                             <p className="list-item__interval">{item.interval}</p>
                         </div>

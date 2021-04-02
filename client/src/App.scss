@@ -3,7 +3,7 @@
 @import './Partials/typography';
 
 .App{
-    @include setup-flex(column,nowrap);
+    display: flex;
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Roboto';
