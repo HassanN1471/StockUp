@@ -94,7 +94,7 @@ app.get('/details/:id', (req, res) => {
             return res.status(200).json(list);
         })
         .catch(err => {
-            console.error(data);
+            //console.error(err);
            return res.status(404).send("Data not found.");
         });
 

@@ -1,0 +1,10 @@
+@import '../../../Partials/variables';
+@import '../../../Partials/mixins';
+
+.nav{
+    @include setup-flex(column, nowrap);
+    align-items: center;
+    border: 1px solid black;
+    height: 100vh;
+    width: 5rem;
+}
