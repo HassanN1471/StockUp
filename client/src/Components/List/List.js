@@ -10,45 +10,78 @@ class List extends Component {
     state = {
         data: null,
         filteredData: null,
-        change: 2
+        change: 2,
+        interval: 5,
+        prevInterval: 5
     }
 
-
+    //get data for list based on user saved symbols
     componentDidMount() {
-        axios.get(`http://localhost:8080/`)
+        axios.post(`http://localhost:8080/list`, {
+            symbols: `FB','AAPL','AMZN','NFLX','GOOG'`,
+            interval:this.state.interval
+        })
             .then(({ data }) => {
-                this.setState({
-                    data: data
-                }, () => console.log(this.state.data));
-                return data;
-            })
-            .then(data => {
-                console.log('here');
-                console.log(data);
+
+                //filter change values based on change state value
                 const filteredData = data.map(item =>
-                    ({ symbol: item.symbol, data: filterData(item.data, this.state.change) })
-                ).filter(item => item.data.length);
+                    ({ symbol: item.symbol, data: filterData(item.data, this.state.change) }))
+                    .filter(item => item.data.length);
+
                 console.log(filteredData);
-                this.setState({ filteredData: filteredData });
+
+                this.setState({
+                    data: data,
+                    filteredData: filteredData
+                }, () => console.log(this.state.data));
+            })
+            .catch(err => {
+                console.log('over here');
+                console.log(err);
             });
     }
 
     handleChange = (e) => {
-        const { value } = e.target;
-        this.setState({ change: value });
+        const { name, value } = e.target;
+        this.setState({ [name]: Number(value) });
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const { value } = e.target.change;
-        console.log(value);
+        if (this.state.interval !== this.state.prevInterval) {
+            axios.post(`http://localhost:8080/list`, {
+                symbols: ['FB', 'AAPL', 'AMZN', 'NFLX', 'GOOG'],
+                interval: this.state.interval
+            })
+                .then(({ data }) => {
+
+                    //filter change values based on change state value
+                    const filteredData = data.map(item =>
+                        ({ symbol: item.symbol, data: filterData(item.data, this.state.change) }))
+                        .filter(item => item.data.length);
+
+                    console.log(filteredData);
+
+                    this.setState({
+                        data: data,
+                        filteredData: filteredData
+                    }, () => console.log(this.state.data));
+                })
+                .catch(err => {
+                    console.log('over here');
+                    console.log(err);
+                });
+            this.setState({ prevInterval: this.state.interval });
+            return;
+        }
+        console.log('im here');
+        //filter change values based on change state value
         const filteredData = this.state.data.map(item =>
-            ({ symbol: item.symbol, data: filterData(item.data, value) })
-        ).filter(item => item.data.length);
+            ({ symbol: item.symbol, data: filterData(item.data, this.state.change) }))
+            .filter(item => item.data.length);
         console.log(filteredData);
         this.setState({ filteredData: filteredData });
     }
-
 
 
 
@@ -57,8 +90,25 @@ class List extends Component {
 
         return (
             <div className='list__form'>
-                <label htmlFor='change' className='list__label'>change</label>
                 <form onSubmit={(e) => this.handleSubmit(e)}>
+                    <label htmlFor='interval' className='list__label'>Category</label>
+                    <select
+                        id="interval"
+                        name="interval"
+                        className='list__interval'
+                        value={this.state.interval}
+                        onChange={this.handleChange}
+                    >
+                        <option value="5">5 min</option>
+                        <option value="10">10 min</option>
+                        <option value="15">15 min</option>
+                        <option value="30">30 min</option>
+                        <option value="60">1 hr</option>
+                        <option value="120">2 hr</option>
+                        <option value="320">4 hr</option>
+                        <option value="480">8 hr</option>
+                    </select>
+                    <label htmlFor='change' className='list__label'>change</label>
                     <input
                         id="change"
                         name="change"

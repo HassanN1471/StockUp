@@ -1,10 +1,16 @@
 @import './Partials/variables';
 @import './Partials/mixins';
+@import './Partials/typography';
 
 .App{
+    @include setup-flex(column,nowrap);
     box-sizing: border-box;
     text-decoration: none;
+    font-family: 'Roboto';
     color: $paragraph-text;
+    width: 100%;
+    min-height: 100vh;
+    height: 100%;
     @include paragraph-mobile;
     @include tablet{
         @include paragraph;
@@ -19,4 +25,8 @@
     font-weight: inherit;
     font-size: inherit;
     line-height: inherit;
+}
+
+text{
+    font-family: 'Roboto';
 }
