@@ -28,11 +28,12 @@ class Stock extends Component {
                 }, () => console.log(this.state.data));
             })
             .catch(err => {
-                console.error(err);
+                console.error(err.response);
             });
     }
 
     componentDidMount() {
+        console.log(this.props.id);
         this.getData(this.props.id)
     }
 

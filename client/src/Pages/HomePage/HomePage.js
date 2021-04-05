@@ -1,43 +1,42 @@
-import { Component } from 'react';
+import { useContext, useState } from 'react';
+import {UserContext} from '../../Components/UserContext/UserContext';
 import Stock from '../../Components/Stock/Stock';
 import { Route } from 'react-router-dom';
 import './HomePage.scss';
 
-class HomePage extends Component {
-    state = {
-        symbol: null,
-    }
+// const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     this.setState({ [name]: value });
+// }
 
-    handleChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
-    }
-
-    handleSubmit = (e) => {
+function HomePage() {
+    const [symbol, setSymbol] = useState(null);
+    const {user,setUser} = useContext(UserContext);
+    
+    const handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({ symbol: e.target.symbol.value });
+        setSymbol(e.target.symbol.value);
         e.target.reset();
     }
-
-    render() {
-        return (
-            <main className="home">
-                <form className='home__form' onSubmit={(e) => this.handleSubmit(e)}>
-                    <input
-                        id="symbol"
-                        name="symbol"
-                        className='home__input'
-                        placeholder='Search'
-                    />
-                    <input className="home__button button" type="submit" value="Search" />
-                </form>
-                {this.state.symbol
-                    ? <Route render={() => <Stock id={this.state.symbol} />} />
-                    : ""
-                }
-            </main>
-        );
-    }
+    return (
+        <main className="home">
+            <div>{user?user.name:''}</div>
+            <div>{user?JSON.stringify(user.symbols):''}</div>
+            <form className='home__form' onSubmit={(e) => handleSubmit(e)}>
+                <input
+                    id="symbol"
+                    name="symbol"
+                    className='home__input'
+                    placeholder='Search'
+                />
+                <input className="home__button button" type="submit" value="Search" />
+            </form>
+            {symbol
+                ? <Route render={() => <Stock id={symbol} />} />
+                : ""
+            }
+        </main>
+    );
 }
 
 export default HomePage;
