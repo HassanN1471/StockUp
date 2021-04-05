@@ -3,9 +3,6 @@ import axios from 'axios';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './reset.css';
 import './App.scss';
-import List from './Components/List/List';
-// import Graph from './Components/Graph/Graph'
-// import Details from './Components/Details/Details';
 import Nav from './Components/Header/header';
 import HomePage from './Pages/HomePage/HomePage';
 import ListPage from './Pages/ListPage/ListPage';
@@ -13,11 +10,6 @@ import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import DetailsPage from './Pages/DetailsPage/DetailsPage';
 
 import { UserContext } from './Components/UserContext/UserContext';
-
-
-// const loginUrl = `${baseUrl}/login`;
-// const signupUrl = `${baseUrl}/signup`;
-
 
 function App() {
     const [user, setUser] = useState(null);
@@ -46,7 +38,7 @@ function App() {
                 setUser(null);
             });
         }
-    }, []);
+    }, [profileUrl]);
 
     return (
 

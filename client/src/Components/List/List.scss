@@ -3,6 +3,7 @@
 
 .list{
     @include setup-flex(column,nowrap);
+    width: 100%;
     padding: 1rem;
     &-item{
         width: 100%;

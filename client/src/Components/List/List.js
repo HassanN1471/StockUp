@@ -15,10 +15,12 @@ class List extends Component {
         prevInterval: 5
     }
 
-    getListData = (symbol) => {
-        console.log(symbol);
+    getListData = (symbols) => {
+        console.log(symbols);
+        const symbolsString = `${symbols}`.split('[]').join("");
+        console.log(symbolsString);
         axios.post(`http://localhost:8080/list`, {
-            symbols: `'FB','AAPL','AMZN','NFLX','GOOG'`,
+            symbols: symbolsString,
             interval: this.state.interval
         })
             .then(({ data }) => {
@@ -45,8 +47,8 @@ class List extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.symbol !== this.props.symbol){
-            this.getListData(this.props.symbol);
+        if (prevProps.symbols !== this.props.symbols){
+            this.getListData(this.props.symbols);
         }
     }
 

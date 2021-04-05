@@ -20,6 +20,7 @@ const API_URL_SANDBOX = 'https://sandbox.iexapis.com';
 const userDataPath = './Data/userData.json';
 const { readData, writeData } = require("./Utils/read-write");
 const { reformatDataForList } = require("./Utils/reformatData");
+const { indexOfItemID } = require("./Utils/indexOfItemID");
 
 const detailsoutes = require('./Routes/details');
 const listRoutes = require('./Routes/list');
@@ -66,7 +67,7 @@ app.post('/signup', (req, res) => {
     username,
     password,// NOTE: Passwords should NEVER be stored in the clear like this. Use a library like bcrypt to Hash the password. For demo purposes only.
     id: uuidv4(),
-    symbols:['FB','AAPL','AMZN','NFLX','GOOG']
+    symbols:[]
   });
   writeData(userDataPath,users);
   console.log(users);
@@ -97,8 +98,40 @@ app.get('/profile', authorize, (req, res) => {
   console.log("id",data.id);
   const users = readData(userDataPath);
   const userData = users.find(user => user.id === data.id);
-  if(!userData) return res.status(401).json({ message: 'User not found.' });
+  if(!userData) return res.status(404).json({ message: 'User not found.' });
   console.log(userData);
+  return res.json({name:userData.name, symbols:userData.symbols})
+});
+
+//endpoint to add symbol to existing user's info
+app.put('/profile/addsymbol', authorize, (req, res) => {
+  const data = req.decoded;
+  const users = readData(userDataPath);
+  const index = indexOfItemID(users, data.id);
+  if (index===-1) return res.status(404).json({ message: 'User not found.' });
+  users[index].symbols.push(req.body.symbol);
+  const userData = users[index];
+  writeData(userDataPath,users);
+  return res.json({name:userData.name, symbols:userData.symbols})
+});
+
+
+//endpoint to delete symbol from existing user's info
+app.put('/profile/deletesymbol', authorize, (req, res) => {
+  const data = req.decoded;
+  console.log("id",data.id);
+  console.log(req.body);
+  const users = readData(userDataPath);
+  indexUser = indexOfItemID(users, data.id);
+  console.log(indexUser);
+  if (indexUser===-1) return res.status(404).json({ message: 'User not found.' });
+  const indexSymbol = users[indexUser].symbols.findIndex(el => el === req.body.symbol);
+  console.log(indexSymbol);
+  if (indexSymbol===-1) return res.status(404).json({ message: 'Symbol not found.' });
+  users[indexUser].symbols.splice(indexSymbol,1);
+  const userData = users[indexUser];
+  console.log(users);
+  writeData(userDataPath,users);
   return res.json({name:userData.name, symbols:userData.symbols})
 });
 

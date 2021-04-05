@@ -1,0 +1,17 @@
+@import '../../Partials/variables';
+@import '../../Partials/mixins';
+
+.profile{
+    @include setup-flex(column,nowrap);
+
+    &__list{
+        display: flex;
+    }
+
+    &__item{
+        display: flex;
+        padding: 1rem;
+        margin: 1rem;
+        border: 1px solid black;
+    }
+}

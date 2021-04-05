@@ -1,5 +1,3 @@
-import { useContext, useState } from 'react';
-import {UserContext} from '../../Components/UserContext/UserContext';
 import Stock from '../../Components/Stock/Stock';
 import './DetailsPage.scss';
 

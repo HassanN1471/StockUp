@@ -1,16 +1,19 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Graph from '../Graph/Graph';
 import { toTimestamp } from '../../Utils';
 import './Stock.scss';
+import AddSymbol from '../AddSymbol/AddSymbol';
 
-class Stock extends Component {
-    state = {
-        data: null,
-    }
+function Stock(props) {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        getData(props.id)
+    }, [props.id])
 
     //get request for graph data
-    getData = (id) => {
+    const getData = (id) => {
         axios.get(`http://localhost:8080/details/${id}`)
             .then(({ data }) => {
                 const dataobj = data.pop()
@@ -23,35 +26,22 @@ class Stock extends Component {
                     item.close,
                     item.volume
                 ]));
-                this.setState({
-                    data: dataobj
-                }, () => console.log(this.state.data));
+                setData(dataobj);
+                console.log(dataobj);
             })
             .catch(err => {
                 console.error(err.response);
             });
     }
 
-    componentDidMount() {
-        console.log(this.props.id);
-        this.getData(this.props.id)
-    }
+    if (!data) return <h1>loading...</h1>;
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.id !== this.props.id) {
-            this.getData(this.props.id);
-        };
-    };
-
-    render() {
-        if (!this.state.data) return <h1>loading...</h1>;
-
-        return (
-            <div className="stock">
-                <Graph data={this.state.data} />
-            </div>
-        );
-    }
+    return (
+        <div className="stock">
+            <Graph data={data} />
+            <AddSymbol symbol={props.id}/>
+        </div>
+    );
 }
 
 export default Stock;

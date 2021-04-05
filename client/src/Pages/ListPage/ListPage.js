@@ -1,13 +1,14 @@
-import { useContext, useState } from 'react';
-import {UserContext} from '../../Components/UserContext/UserContext';
+import { useContext } from 'react';
+import { UserContext } from '../../Components/UserContext/UserContext';
 import List from '../../Components/List/List';
+import './ListPage.scss';
 
 function ListPage(props) {
-    const {user,setUser} = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     return (
-        <main className='listpage'>
-            <List symbols={user?user.symbols:''}/>
+        <main className='list-page'>
+            <List symbols={user ? user.symbols : ''} />
         </main>
     );
 }

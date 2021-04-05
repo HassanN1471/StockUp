@@ -6,10 +6,9 @@ import Profile from '../../Components/Profile/Profile';
 const baseUrl = "http://localhost:8080";
 const loginUrl = `${baseUrl}/login`;
 const signupUrl = `${baseUrl}/signup`;
-const profileUrl = `${baseUrl}/profile`;
 
 function ProfilePage () {
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     const [isSignedUp, setIsSignedUp] = useState(true);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -95,7 +94,7 @@ function ProfilePage () {
     //display sign up screen
     const renderSignUp = () => {
         return (
-            <div className="profile">
+            <div className="profile-page">
                 <h1>SignUp</h1>
                 {isLoginError && <label style={{ color: "red" }}>{errorMessage}</label>}
                 <form onSubmit={signup}>
@@ -119,7 +118,7 @@ function ProfilePage () {
     //display login screen
     const renderLogin = () => {
         return (
-            <div className="profile">
+            <div className="profile-page">
                 <h1>Login</h1>
                 {isLoginError && <label style={{ color: "red" }}>{errorMessage}</label>}
                 <form onSubmit={login}>
@@ -144,7 +143,7 @@ function ProfilePage () {
     if (!isLoggedIn) return renderLogin();
 
     return (
-        <div className="profile">
+        <div className="profile-page">
             <Profile />
         </div>
     );

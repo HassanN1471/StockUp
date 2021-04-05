@@ -11,7 +11,7 @@ import './HomePage.scss';
 
 function HomePage() {
     const [symbol, setSymbol] = useState(null);
-    const {user,setUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     
     const handleSubmit = (e) => {
         e.preventDefault();
