@@ -4,14 +4,35 @@
 .profile{
     @include setup-flex(column,nowrap);
 
+    &__header{
+        @include header;
+        margin: 2.5rem 0;
+        color: $secondary-color;
+    }
+
+    &__subheader{
+        @include subheader;
+        margin-bottom: 1rem;
+    }
+
     &__list{
-        display: flex;
+        @include setup-flex(row, wrap);
     }
 
     &__item{
         display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 0 1 calc(23% - 1rem);
         padding: 1rem;
         margin: 1rem;
-        border: 1px solid black;
+        background-color: $card-color;
+        box-shadow: 0 3px 5px 0 rgba($color: $paragraph-text, $alpha: 0.15);
+        border-radius: 5px;
+    }
+
+    &__link{
+        margin-right: 1rem;
+        font-size: 1.25rem;
     }
 }

@@ -5,7 +5,7 @@ import './reset.css';
 import './App.scss';
 import Nav from './Components/Header/header';
 import HomePage from './Pages/HomePage/HomePage';
-import ListPage from './Pages/ListPage/ListPage';
+import ChangesPage from './Pages/ChangesPage/ChangesPage';
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import DetailsPage from './Pages/DetailsPage/DetailsPage';
 
@@ -44,14 +44,14 @@ function App() {
 
         <div className="App">
             <BrowserRouter>
-                <Nav />
-                <Switch>
-                    <UserContext.Provider value={value}>
+                <UserContext.Provider value={value}>
+                    <Nav />
+                    <Switch>
                         <Route path="/" exact
                             render={(routerProps) => <HomePage {...routerProps} />}
                         />
-                        <Route path="/list"
-                            render={(routerProps) => <ListPage {...routerProps} />}
+                        <Route path="/changes"
+                            render={(routerProps) => <ChangesPage {...routerProps} />}
                         />
                         <Route path="/profile"
                             render={(routerProps) => <ProfilePage {...routerProps} />}
@@ -59,8 +59,8 @@ function App() {
                         <Route path="/details/:id"
                             render={(routerProps) => <DetailsPage {...routerProps} />}
                         />
-                    </UserContext.Provider>
-                </Switch>
+                    </Switch>
+                </UserContext.Provider>
             </BrowserRouter>
         </div>
     );

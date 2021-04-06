@@ -23,24 +23,20 @@ const Profile = () => {
         }).catch(err => {
             console.log(err.response);
         });
-    }, [user, setUser]);
-
-    const handleLogout = () => {
-        setUser(null);
-        sessionStorage.removeItem("authToken");
-    };
+    },[]);
 
     if (!user) return <h1>Loading...</h1>;
+
     return (
-        <div className='profile'>
-            <h1 className='profile__header'>Welcome {user.name}!</h1>
+        <main className='profile'>
+            <h1 className='profile__header'>My Stocks</h1>
+            <h1 className='profile__subheader'>{user.name}'s stocks</h1>
             <ul className='profile__list'>
                 {user.symbols.map((symbol, i) => {
                     return <ProfileItem symbol={symbol} key={symbol}/>
                 })}
             </ul>
-            <button onClick={handleLogout}>logout</button>
-        </div>
+        </main>
     );
 }
 

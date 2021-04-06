@@ -1,0 +1,12 @@
+@import '../../Partials/variables';
+
+.delete-btn{
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+
+    &__icon{
+        fill: $primary-red;
+    }
+}

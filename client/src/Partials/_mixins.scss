@@ -8,26 +8,20 @@
     line-height: calc(1rem + 7vw);
 }
 
-@mixin header_1{
+@mixin h{
     font-size: 2.25rem;
     line-height: 2.75rem;
     font-weight: 700;
 }
 
-@mixin header_2{
+@mixin sh{
     font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-}
-
-@mixin subheader{
-    font-size: 1rem;
     line-height: 1.5rem;
     font-weight: 500;
 }
 
-@mixin paragraph{
-    font-size: 0.875rem;
+@mixin p{
+    font-size: 1rem;
     line-height: 1.5rem;
 }
 
@@ -44,20 +38,44 @@
 }
 
 //mobile styles
-@mixin header-mobile{
+@mixin h-mobile{
     font-size: 1.5rem;
     line-height: 2rem;
     font-weight: 700;
 }
-@mixin subheader-mobile{
+@mixin sh-mobile{
     font-size: 0.875rem;
     line-height: 1.375rem;
     font-weight: 500;
 }
-@mixin paragraph-mobile{
+@mixin p-mobile{
     font-size: 0.8125rem;
     line-height: 1.125rem;
 }
+
+@mixin header {
+    @include h-mobile;
+    @include tablet{
+        @include h;
+    }
+}
+
+@mixin subheader {
+    @include sh-mobile;
+    @include tablet{
+        @include sh;
+    }
+}
+
+@mixin paragraph {
+    @include p-mobile;
+    @include tablet{
+        @include p;
+    }
+}
+
+
+
 
 //mixin for different screen sizes
 @mixin tablet {
@@ -83,4 +101,11 @@
     border-bottom: 1px solid $text-field-border;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
+}
+
+@mixin button{
+    border-radius: 5px;
+    padding: 0.2rem 0.5rem;
+    margin: 0.5rem;
+    outline: none;
 }

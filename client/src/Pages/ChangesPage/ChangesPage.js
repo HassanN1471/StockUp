@@ -1,12 +1,16 @@
 import { useContext } from 'react';
 import { UserContext } from '../../Components/UserContext/UserContext';
 import List from '../../Components/List/List';
-import './ListPage.scss';
+import './ChangesPage.scss';
+import { Redirect } from 'react-router';
 
 function ListPage(props) {
     const { user } = useContext(UserContext);
 
+    if (!user) return <Redirect to='/profile'/>;
+
     return (
+        
         <main className='list-page'>
             <List symbols={user ? user.symbols : ''} />
         </main>

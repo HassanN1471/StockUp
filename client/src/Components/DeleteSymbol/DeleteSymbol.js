@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { UserContext } from '../UserContext/UserContext';
 import axios from 'axios';
+import { ReactComponent as DeleteIcon } from '../../Assets/svg/delete_icon.svg';
+import './DeleteSymbol.scss';
 
 function DeleteSymbol(props) {
     const { setUser } = useContext(UserContext);
@@ -30,8 +32,8 @@ function DeleteSymbol(props) {
     }
 
     return (
-        <button onClick={deleteHandler}>
-            Delete
+        <button className='delete-btn' onClick={deleteHandler}>
+            <DeleteIcon className='delete-btn__icon'/>
         </button>
     );
 }

@@ -5,7 +5,7 @@ function ProfileItems(props) {
 
     return (
         <div className='profile__item'>
-            <Link to={`/details/${props.symbol}`} className='profile__item'>{props.symbol} </Link>
+            <Link to={`/details/${props.symbol}`} className='profile__link'>{props.symbol} </Link>
             <DeleteSymbol symbol={props.symbol} />
         </div>
 
