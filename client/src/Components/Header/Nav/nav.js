@@ -1,9 +1,9 @@
-import './nav.scss';
 import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { useContext } from 'react';
 import { UserContext } from '../../UserContext/UserContext';
-
+import Burger from './Burger';
+import './nav.scss';
 
 const Nav = () => {
     const { user, setUser } = useContext(UserContext);
@@ -23,7 +23,7 @@ const Nav = () => {
     return (
         <nav className="nav">
             <Link to='/' className="nav__logo nav__link" >StockUp</Link>
-            <Link to='/changes' className="nav__link">Changes</Link>
+            <Link to='/changes' className="nav__mobile nav__link">Changes</Link>
             <form className='nav__form' onSubmit={(e) => handleSubmit(e)}>
                 <input
                     id="symbol"
@@ -33,9 +33,10 @@ const Nav = () => {
                 />
                 <input className="nav__search-btn" type="submit" value="GO" />
             </form>
+                <Burger />
             <div className='nav__right-box'>
-                <Link to='/profile' className="nav__button button">{user ? 'My Stocks' : 'Log In'}</Link>
-                {user ? <button className='nav__button button' onClick={handleLogout}>logout</button> : ''}
+                <Link to='/profile' className="nav__button button nav__mobile">{user ? 'My Stocks' : 'Log In'}</Link>
+                {user ? <button className='nav__button button nav__mobile' onClick={handleLogout}>logout</button> : ''}
             </div>
         </nav>
     );

@@ -12,11 +12,12 @@ class List extends Component {
         filteredData: null,
         change: 2,
         interval: 5,
-        prevInterval: 5
+        prevInterval: 5,
+        symbolsEmpty:true
     }
 
     getListData = (symbols) => {
-        console.log(symbols);
+        if(this.state.symbolsEmpty) return;
         const symbolsString = `${symbols}`.split('[]').join("");
         console.log(symbolsString);
         axios.post(`http://localhost:8080/list`, {
@@ -43,14 +44,20 @@ class List extends Component {
 
     //get data for list based on user saved symbols
     componentDidMount() {
+        console.log('mount',this.props.symbols);
         if (this.props.symbols) {
-            this.getListData(this.props.symbols);
+            this.setState({symbolsEmpty:false}
+                ,()=>this.getListData(this.props.symbols));
+        }
+        else{
+            this.setState({symbolsEmpty:true});
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.symbols !== this.props.symbols) {
-            this.getListData(this.props.symbols);
+        if (prevProps.symbols !== this.props.symbols && !this.state.symbolsEmpty) {
+            this.setState({symbolsEmpty:false}
+                ,()=>this.getListData(this.props.symbols));
         }
     }
 
@@ -75,6 +82,7 @@ class List extends Component {
     }
 
     render() {
+        if (this.state.symbolsEmpty) return <h1>No Symbols saved</h1>;
         if (!this.state.filteredData) return <h1>loading...</h1>;
 
         return (

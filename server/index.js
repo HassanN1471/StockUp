@@ -52,6 +52,7 @@ app.post('/login', (req, res) => {
     const { username, password } = req.body
     const users = readData(userDataPath);
     const user = users.find(user => user.username === username);
+    if (!user) return res.status(403).json({ message: 'Invalid username or password', success: false });
     //To check password
     bcrypt.compare(password, user.password, function (err, result) {
         if (result) {
@@ -59,7 +60,7 @@ app.post('/login', (req, res) => {
             const token = jwt.sign(payload, JWT_KEY)
             return res.status(200).json({ token });
         } else {
-            return res.status(403).json({ message: 'Invalid username or password', success: false })
+            return res.status(403).json({ message: 'Invalid username or password', success: false });
         }
     });
 
