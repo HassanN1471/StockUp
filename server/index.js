@@ -41,9 +41,7 @@ app.post('/signup', (req, res) => {
         });
         writeData(userDataPath, users);
         console.log(users);
-        return res.status(201).json({
-            success: 'true'
-        });
+        return res.status(201).json({success: 'true'});
     })
 });
 
