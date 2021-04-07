@@ -1,0 +1,128 @@
+@import './variables';
+
+//text styles
+//desktop and tablet styles
+@mixin hero-header{
+    font-weight: 700;
+    font-size: calc(1rem + 5vw);
+    line-height: calc(1rem + 7vw);
+}
+
+@mixin h{
+    font-size: 2.25rem;
+    line-height: 2.75rem;
+    font-weight: 700;
+}
+
+@mixin sh{
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: 500;
+}
+
+@mixin p{
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+@mixin contact-info{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@mixin label{
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    color: $label-color;
+    font-weight: 500;
+}
+
+//mobile styles
+@mixin h-mobile{
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+@mixin sh-mobile{
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 500;
+}
+@mixin p-mobile{
+    font-size: 0.8125rem;
+    line-height: 1.125rem;
+}
+
+@mixin header {
+    @include h-mobile;
+    @include tablet{
+        @include h;
+    }
+}
+
+@mixin subheader {
+    @include sh-mobile;
+    @include tablet{
+        @include sh;
+    }
+}
+
+@mixin paragraph {
+    @include p-mobile;
+    @include tablet{
+        @include p;
+    }
+}
+
+//mixin for different screen sizes
+@mixin tablet {
+  @media screen and (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+//setup flexbox
+@mixin setup-flex($direction, $wrap) {
+    display: flex;
+    flex-flow: $direction $wrap;
+}
+
+//divider border style
+@mixin divider {
+    border-bottom: 1px solid $label-color;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+@mixin button{
+    background-color: $primary-color;
+    color: $primary-white;
+    border-radius: 5px;
+    outline: none;
+    padding: 0.2rem 0.5rem;
+    margin: 0.5rem;
+
+    &:hover{
+        background-color: $secondary-color;
+        color: $primary-white;
+    }
+}
+
+@mixin input{
+    width: 100%;
+    height: 2.5rem;
+    margin: 0;
+    padding: 0.2rem 0.5rem;
+    border: 2px solid rgba($color: $paragraph-text, $alpha: 0.15);
+    border-radius: 5px;
+
+    &::placeholder {
+        color: $placeholder-color;
+    }
+}

@@ -1,0 +1,47 @@
+@import './Partials/variables';
+@import './Partials/mixins';
+@import './Partials/typography';
+
+.App{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto';
+    color: $paragraph-text;
+    @include paragraph;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    font-family: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+text{
+    font-family: 'Roboto';
+}
+
+a:active, a:focus {
+    outline: 0;
+}
+
+.button{
+    @include button;
+}
+
+main{
+    padding: 1rem calc(5 * 1vw + 0.003 * 1vw);
+}
+
+.input{
+    @include input;
+}
+
+.label{
+    @include label;
+}

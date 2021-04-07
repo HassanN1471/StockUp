@@ -1,0 +1,20 @@
+@import '../../Partials/variables';
+@import '../../Partials/mixins';
+
+.home{
+    @include setup-flex(column,nowrap);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    &__header{
+        margin-top: 5rem;
+        @include hero-header;
+        color: $primary-color;
+    }
+
+    &__subheader{
+        @include header;
+        color: $secondary-color
+    }
+}
