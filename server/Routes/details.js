@@ -31,40 +31,41 @@ router.get('/details/:id', (req, res) => {
                     close: item.close,
                     volume: item.volume
                 }));
-                //function to calculate value difference between intervals
                 return { symbol: item, data: itemData };
             });
             return res.status(200).json(list);
         })
         .catch(err => {
             //console.error(err);
-           return res.status(404).send("Data not found.");
+            return res.status(404).send("Data not found.");
         });
-
-    //const data = readData('./Data/single-data.json');
-
-    // if (!stockData) {
-    //     return res.status(404).send("Data not found.");
-    // }
-
-    // //refromat data to objects with properties of symbol and data
-    // const list = Object.keys(stockData).map(item => {
-    //     //refromat data for only time and close value
-    //     const itemData = data[item]['intraday-prices'].map(item => ({
-    //         date: item.date,
-    //         minute: item.minute,
-    //         high: item.high,
-    //         low: item.low,
-    //         open: item.open,
-    //         close: item.close,
-    //         volume: item.volume
-    //     }));
-    //     //function to calculate value difference between intervals
-    //     return { symbol: item, data: itemData };
-    // });
-
-    //res.status(200).json(list);
 });
 
+router.get('/details/stats/:id', (req, res) => {
+    //console.log(req.params.id);
+
+    const url = `${API_URL_SANDBOX}/stable/stock/${req.params.id}/stats?token=${API_TOKEN_SANDBOX}`
+
+    //console.log(url);
+
+    axios.get(url)
+        .then(({ data }) => {
+            //reformat data for data needed
+            const itemData = {
+                companyName:data.companyName,
+                avg10Volume:data.avg10Volume,
+                avg30Volume:data.avg30Volume,
+                week52range: `${data.week52low} - ${data.week52high}`,
+                week52change:data.week52change,
+                peRatio:data.peRatio,
+                beta:data.beta
+            };
+            return res.status(200).json(itemData);
+        })
+        .catch(err => {
+            //console.error(err);
+            return res.status(404).send("Data not found.");
+        });
+});
 
 module.exports = router;

@@ -35,21 +35,6 @@ router.post('/list', (req, res) => {
             //console.error(err);
             return res.status(404).send("Data not found.");
         });
-
-    // const data = readData('./Data/multi-data.json');
-
-    // if (!data) {
-    //     return res.status(404).send("Data not found.");
-    // }
-    // //refromat data to objects with properties of symbol and data
-    // const list = Object.keys(data).map(item => {
-    //     //reformat data for only time and close value
-    //     const itemData = data[item]['intraday-prices'].map(item => ({ label: item.label, close: item.close }));
-    //     //function to calculate value difference between intervals
-    //     return ({ symbol: item, data: reformatDataForList(itemData) });
-    // });
-
-    // return res.status(200).json(list);
 });
 
 module.exports = router;

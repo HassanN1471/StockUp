@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { UserContext } from '../UserContext/UserContext';
 import axios from 'axios';
+import { ReactComponent as AddIcon } from '../../Assets/svg/add_icon.svg';
+import './AddSymbol.scss';
 
 function AddSymbol(props) {
     const { user, setUser } = useContext(UserContext);
@@ -27,10 +29,10 @@ function AddSymbol(props) {
                 // setUser(null);
             });
     }
-    if(user && user.symbols.find(symbol=>symbol===props.symbol)) return null;
+    if(user && user.symbols.find(symbol=>symbol===props.symbol)) return <p className='add-btn__added'>ADDED</p>;
     return (
-        <button onClick={addHandler}>
-            Add
+        <button className='add-btn' onClick={addHandler}>
+            <AddIcon className='add-btn__icon'  />
         </button>
     );
 }

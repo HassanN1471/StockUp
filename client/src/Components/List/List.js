@@ -22,21 +22,23 @@ class List extends Component {
         axios.post(`http://localhost:8080/list`, {
             symbols: symbolsString,
             interval: this.state.interval
-        })
-            .then(({ data }) => {
-                //filter change values based on change state value
-                const filteredData = data.map(item =>
-                    ({ symbol: item.symbol, data: filterData(item.data, this.state.change) }))
-                    .filter(item => item.data.length);
-
-                this.setState({
-                    data: data,
-                    filteredData: filteredData
-                }, () => { console.log(this.state.data); console.log(filteredData); });
-            })
-            .catch(err => {
-                console.log(err.response);
-            });
+        }, {
+            headers: {
+                // here grab token from localStorage
+                authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+            }
+        }).then(({ data }) => {
+            //filter change values based on change state value
+            const filteredData = data.map(item =>
+                ({ symbol: item.symbol, data: filterData(item.data, this.state.change) }))
+                .filter(item => item.data.length);
+            this.setState({
+                data: data,
+                filteredData: filteredData
+            }, () => { console.log(this.state.data); console.log(filteredData); });
+        }).catch(err => {
+            console.log(err.response);
+        });
     }
 
     //get data for list based on user saved symbols
@@ -60,27 +62,7 @@ class List extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.state.interval !== this.state.prevInterval) {
-            axios.post(`http://localhost:8080/list`, {
-                symbols: ['FB', 'AAPL', 'AMZN', 'NFLX', 'GOOG'],
-                interval: this.state.interval
-            })
-                .then(({ data }) => {
-
-                    //filter change values based on change state value
-                    const filteredData = data.map(item =>
-                        ({ symbol: item.symbol, data: filterData(item.data, this.state.change) }))
-                        .filter(item => item.data.length);
-
-                    console.log(filteredData);
-
-                    this.setState({
-                        data: data,
-                        filteredData: filteredData
-                    }, () => console.log(this.state.data));
-                })
-                .catch(err => {
-                    console.log(err.response);
-                });
+            this.getListData(this.props.symbols);
             this.setState({ prevInterval: this.state.interval });
             return;
         }

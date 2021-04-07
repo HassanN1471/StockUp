@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Graph from '../Graph/Graph';
+import StockInfo from '../Stock/StockInfo';
 import { toTimestamp } from '../../Utils';
 import './Stock.scss';
-import AddSymbol from '../AddSymbol/AddSymbol';
 
 function Stock(props) {
     const [data, setData] = useState(null);
@@ -39,7 +39,7 @@ function Stock(props) {
     return (
         <div className="stock">
             <Graph data={data} />
-            <AddSymbol symbol={props.id}/>
+            <StockInfo id={props.id}/>
         </div>
     );
 }
