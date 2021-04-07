@@ -9,9 +9,6 @@
     text-decoration: none;
     font-family: 'Roboto';
     color: $paragraph-text;
-    width: 100%;
-    min-height: 100vh;
-    height: 100%;
     @include paragraph;
 }
 
@@ -38,5 +35,13 @@ a:active, a:focus {
 }
 
 main{
-    padding: 1rem 5 * 1vw + 0.003 * 1vw;
+    padding: 1rem calc(5 * 1vw + 0.003 * 1vw);
+}
+
+.input{
+    @include input;
+}
+
+.label{
+    @include label;
 }

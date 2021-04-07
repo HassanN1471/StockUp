@@ -1,0 +1,50 @@
+@import '../../Partials/variables';
+@import '../../Partials/mixins';
+
+.profile-page{
+    @include setup-flex(column,nowrap);
+    justify-content: center;
+    align-items: center;
+
+    &__header{
+        @include header;
+        margin: 1rem;
+    }
+
+    &__form{
+        @include setup-flex(column,nowrap);
+        align-items: center;
+        box-shadow: $box-shadow-value;
+        border-radius: 1rem;
+        border: $border-value;
+        width: 100%;
+        max-width: 30rem;
+        margin: 1.5rem;
+        padding: 1rem;
+    }
+
+    &__input{
+        margin-bottom: 1rem;
+    }
+    
+    &__button{
+        width: 100%;
+        padding: 0.5rem 0;
+        background-color: $primary-color;
+        color: $primary-white;
+        border: $border-value;
+    }
+
+    &__signup{
+        margin-top: 1rem;
+        padding: 0;
+        border: none;
+        background-color: transparent;
+        color: $secondary-color;
+    }
+
+    &__error{
+        color: $primary-red;
+        margin: 0.5rem;
+    }
+}

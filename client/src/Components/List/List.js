@@ -41,13 +41,13 @@ class List extends Component {
 
     //get data for list based on user saved symbols
     componentDidMount() {
-        if(this.props.symbols){
+        if (this.props.symbols) {
             this.getListData(this.props.symbols);
         }
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.symbols !== this.props.symbols){
+        if (prevProps.symbols !== this.props.symbols) {
             this.getListData(this.props.symbols);
         }
     }
@@ -92,46 +92,50 @@ class List extends Component {
         this.setState({ filteredData: filteredData });
     }
 
-
-
     render() {
         if (!this.state.filteredData) return <h1>loading...</h1>;
 
         return (
             <section className='list'>
-                <h1 className='list__header'>List</h1>
-                <form className='list__form' onSubmit={(e) => this.handleSubmit(e)}>
-                    <label htmlFor='interval' className='list__label'>Category</label>
-                    <select
-                        id="interval"
-                        name="interval"
-                        className='list__interval'
-                        value={this.state.interval}
-                        onChange={this.handleChange}
-                    >
-                        <option value="5">5 min</option>
-                        <option value="10">10 min</option>
-                        <option value="15">15 min</option>
-                        <option value="30">30 min</option>
-                        <option value="60">1 hr</option>
-                        <option value="120">2 hr</option>
-                        {/* <option value="320">4 hr</option>
+                <h1 className='list__header'>Changes</h1>
+                <div className='list__container'>
+                    <form className='list__form' onSubmit={(e) => this.handleSubmit(e)}>
+                        <div className='list__input-container'>
+                            <label htmlFor='interval' className='list__label'>Interval</label>
+                            <select
+                                id="interval"
+                                name="interval"
+                                className='list__input input'
+                                value={this.state.interval}
+                                onChange={this.handleChange}
+                            >
+                                <option value="5">5 min</option>
+                                <option value="10">10 min</option>
+                                <option value="15">15 min</option>
+                                <option value="30">30 min</option>
+                                <option value="60">1 hr</option>
+                                <option value="120">2 hr</option>
+                                {/* <option value="320">4 hr</option>
                         <option value="480">8 hr</option> */}
-                    </select>
-                    <label htmlFor='change' className='list__label'>set min % change</label>
-                    <input
-                        id="change"
-                        name="change"
-                        className='list__input'
-                        value={this.state.change}
-                        onChange={this.handleChange}
-                    />
-                    <input className="list__button button" type="submit" value="SUBMIT" />
-                </form>
+                            </select>
+                        </div>
+                        <div className='list__input-container'>
+                            <label htmlFor='change' className='list__label'>min % change</label>
+                            <input
+                                id="change"
+                                name="change"
+                                className='list__input input'
+                                value={this.state.change}
+                                onChange={this.handleChange}
+                            />
+                        </div>
+                        <input className="list__button button" type="submit" value="SUBMIT" />
+                    </form>
 
-                {this.state.filteredData.map((item, i) => {
-                    return <ListItem data={item} key={i} />
-                })}
+                    {this.state.filteredData.map((item, i) => {
+                        return <ListItem data={item} key={i} />
+                    })}
+                </div>
             </section>
         );
     }

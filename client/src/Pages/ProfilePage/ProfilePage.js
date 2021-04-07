@@ -2,16 +2,17 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../Components/UserContext/UserContext';
 import axios from 'axios';
 import Profile from '../../Components/Profile/Profile';
+import './ProfilePage.scss';
 
 const baseUrl = "http://localhost:8080";
 const loginUrl = `${baseUrl}/login`;
 const signupUrl = `${baseUrl}/signup`;
 
-function ProfilePage () {
+function ProfilePage() {
     const { user } = useContext(UserContext);
 
     const [isSignedUp, setIsSignedUp] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState((user)?true:false);
     const [isLoginError, setIsLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -37,7 +38,7 @@ function ProfilePage () {
         const { username, password } = e.target;
         //check if fields are empty
         if (username.value === "" || password.value === "") {
-            setIsLoginError(false);
+            setIsLoginError(true);
             setErrorMessage("You must provide a username and password");
             return;
         }
@@ -94,48 +95,57 @@ function ProfilePage () {
     //display sign up screen
     const renderSignUp = () => {
         return (
-            <div className="profile-page">
-                <h1>SignUp</h1>
-                {isLoginError && <label style={{ color: "red" }}>{errorMessage}</label>}
-                <form onSubmit={signup}>
-                    <div className="form-group">
-                        Username: <input type="text" name="username" />
-                    </div>
-                    <div className="form-group">
-                        Name: <input type="text" name="name" />
-                    </div>
-                    <div className="form-group">
-                        Password: <input type="password" name="password" />
-                    </div>
-                    <button className="button" type="submit" >
-                        Signup
-                    </button>
+            <main className="profile-page">
+                <form className="profile-page__form" onSubmit={signup}>
+                    <h1 className="profile-page__header">SignUp</h1>
+                    {isLoginError && <label className="profile-page__error" >{errorMessage}</label>}
+                    <input
+                        type="text"
+                        name="username"
+                        className='profile-page__input input'
+                        placeholder='Enter a username'
+                    />
+                    <input
+                        type="text"
+                        name="name"
+                        className='profile-page__input input'
+                        placeholder='Enter your name'
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        className='profile-page__input input'
+                        placeholder='Enter a password'
+                    />
+                    <button className="profile-page__button button" type="submit" >Sign Up</button>
                 </form>
-            </div>
+            </main>
         );
     }
 
     //display login screen
     const renderLogin = () => {
         return (
-            <div className="profile-page">
-                <h1>Login</h1>
-                {isLoginError && <label style={{ color: "red" }}>{errorMessage}</label>}
-                <form onSubmit={login}>
-                    <div className="form-group">
-                        Username: <input type="text" name="username" />
-                    </div>
-                    <div className="form-group">
-                        Password: <input type="password" name="password" />
-                    </div>
-                    <button className="button" type="submit" >
-                        Login
-                    </button>
-                    <button className="button" onClick={handleSignupButton}>
-                        Signup
-                    </button>
+            <main className="profile-page">
+                <form className="profile-page__form" onSubmit={login}>
+                    <h1 className="profile-page__header">Login</h1>
+                    {isLoginError && <label className="profile-page__error">{errorMessage}</label>}
+                    <input
+                        type="text"
+                        name="username"
+                        className='profile-page__input input'
+                        placeholder='Username'
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        className='profile-page__input input'
+                        placeholder='Password'
+                    />
+                    <button className="profile-page__button button" type="submit" >Log In</button>
+                    <button className="profile-page__signup" onClick={handleSignupButton}>Sign Up</button>
                 </form>
-            </div>
+            </main>
         );
     };
 
@@ -143,9 +153,9 @@ function ProfilePage () {
     if (!isLoggedIn) return renderLogin();
 
     return (
-        <div className="profile-page">
+        <main className="profile-page">
             <Profile />
-        </div>
+        </main>
     );
 
 }

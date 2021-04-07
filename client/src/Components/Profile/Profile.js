@@ -28,7 +28,7 @@ const Profile = () => {
     if (!user) return <h1>Loading...</h1>;
 
     return (
-        <main className='profile'>
+        <section className='profile'>
             <h1 className='profile__header'>My Stocks</h1>
             <h1 className='profile__subheader'>{user.name}'s stocks</h1>
             <ul className='profile__list'>
@@ -36,7 +36,7 @@ const Profile = () => {
                     return <ProfileItem symbol={symbol} key={symbol}/>
                 })}
             </ul>
-        </main>
+        </section>
     );
 }
 
