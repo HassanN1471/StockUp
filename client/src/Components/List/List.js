@@ -55,7 +55,7 @@ class List extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.symbols !== this.props.symbols && !this.state.symbolsEmpty) {
+        if (prevProps.symbols !== this.props.symbols && this.state.symbolsEmpty) {
             this.setState({symbolsEmpty:false}
                 ,()=>this.getListData(this.props.symbols));
         }
