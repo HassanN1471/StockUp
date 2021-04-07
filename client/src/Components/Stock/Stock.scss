@@ -4,4 +4,41 @@
 .stock{
     @include setup-flex(column,nowrap);
     width: 100%;
+
+    &__info-container{
+        @include setup-flex(column,nowrap);
+    }
+
+    &__box{
+        display: flex;
+        align-items: center;
+    }
+
+    &__name{
+        @include header;
+    }
+
+    &__symbol{
+        font-size: 1.5rem;
+        margin-left: 0.5rem;
+    }
+
+    &__add{
+        margin-left: 1rem;
+    }
+
+    &__list{
+        @include setup-flex(row, wrap);
+    }
+
+    &__item{
+        flex: 0 1 calc(50% - 1rem);
+        width: fit-content;
+        padding: 1rem;
+    }
+
+    &__data{
+        margin-top: 0.5rem;
+        font-weight: 900;
+    }
 }

@@ -1,0 +1,27 @@
+@import '../../Partials/variables';
+
+.add-btn{
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+
+    &__icon{
+        fill: $primary-green;
+        transition: 0.5s ease;
+        transform-origin: 50% 50%;
+        &:hover{
+            transform: scale(1.5);
+        }
+    }
+
+    &__added{
+        background-color: rgba($color: $primary-green, $alpha: 0.15);;
+        color: $primary-green;
+        border: 1px solid $primary-green;
+        border-radius: 9px;
+        padding: 0.1rem;
+    }
+}

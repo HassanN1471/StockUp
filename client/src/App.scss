@@ -4,17 +4,12 @@
 
 .App{
     display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Roboto';
     color: $paragraph-text;
-    width: 100%;
-    min-height: 100vh;
-    height: 100%;
-    @include paragraph-mobile;
-    @include tablet{
-        @include paragraph;
-    }
+    @include paragraph;
 }
 
 *, *:before, *:after {
@@ -29,4 +24,24 @@
 
 text{
     font-family: 'Roboto';
+}
+
+a:active, a:focus {
+    outline: 0;
+}
+
+.button{
+    @include button;
+}
+
+main{
+    padding: 1rem calc(5 * 1vw + 0.003 * 1vw);
+}
+
+.input{
+    @include input;
+}
+
+.label{
+    @include label;
 }

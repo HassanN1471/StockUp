@@ -1,13 +1,24 @@
 //color palette
+$primary-color: #0081A7;
+$secondary-color: #00AFB9;
+
+$label-color: #afafaf;
+
 $paragraph-text: #323232;
+
 $primary-green: #19be87;
 $primary-red: #f72121;
-
 $primary-white: #ffffff;
+$secondary-white:#F5F5F5;
 
-$primary-cta: #0095FF;
-$primary-cta-hover: #0065AD;
+$placeholder-color: #8B939C;
+
+$card-color:#fafafa;
 
 //breakpoints
 $desktop-breakpoint: 1280px;
 $tablet-breakpoint: 768px;
+
+$border-value: 1px solid rgba($color: $paragraph-text, $alpha: 0.15);
+
+$box-shadow-value: 0 3px 5px 0 rgba($color: $paragraph-text, $alpha: 0.15);
