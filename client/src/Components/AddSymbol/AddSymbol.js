@@ -29,7 +29,7 @@ function AddSymbol(props) {
                 // setUser(null);
             });
     }
-    if(user && user.symbols.find(symbol=>symbol===props.symbol)) return <p className='add-btn__added'>ADDED</p>;
+    if(Array.isArray(user.symbols) && user.symbols.find(symbol=>symbol===props.symbol)) return <p className='add-btn__added'>ADDED</p>;
     return (
         <button className='add-btn' onClick={addHandler}>
             <AddIcon className='add-btn__icon'  />

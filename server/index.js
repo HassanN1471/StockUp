@@ -1,18 +1,16 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || process.argv[2] || 8080;
-const { v4: uuidv4 } = require('uuid');
 const jwt = require("jsonwebtoken");
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+
+const User = require('./models/user');
 
 app.use(express.json());
 app.use(cors());
 
 require('dotenv').config();
-
-const userDataPath = './Data/userData.json';
-const { readData, writeData } = require("./Utils/read-write");
 
 const { authorize } = require("./Utils/authorize");
 
@@ -27,41 +25,48 @@ app.use('/', detailsoutes);
 
 // A Basic Signup end point
 app.post('/signup', (req, res) => {
-    const { username, name, password } = req.body
-    const users = readData(userDataPath);
+    console.log(req.body);
+    const { name, username, password } = req.body
+    //const users = readData(userDataPath);
     //gen hash password
     bcrypt.hash(password, 10, function (err, hash) {
-        // Store user data.
-        users.push({
-            name,
-            username,
+        // create new user and store in database.
+        new User({
+            name: name,
+            username: username,
             password: hash,
-            id: uuidv4(),
-            symbols: []
-        });
-        writeData(userDataPath, users);
-        console.log(users);
-        return res.status(201).json({success: 'true'});
+        })
+            .save()
+            .then(newUser => {
+                console.log(newUser);
+                return res.status(201).json({ success: 'true' });
+            });
     })
 });
 
 // A Basic Login end point
 app.post('/login', (req, res) => {
     const { username, password } = req.body
-    const users = readData(userDataPath);
-    const user = users.find(user => user.username === username);
-    if (!user) return res.status(403).json({ message: 'Invalid username or password', success: false });
-    //To check password
-    bcrypt.compare(password, user.password, function (err, result) {
-        if (result) {
-            const payload = { id: user.id };
-            const token = jwt.sign(payload, JWT_KEY)
-            return res.status(200).json({ token });
-        } else {
-            return res.status(403).json({ message: 'Invalid username or password', success: false });
-        }
-    });
-
+    User
+        .where({ username: username })
+        .fetch()
+        .then(user => {
+            if (user) {
+                //To check password
+                bcrypt.compare(password, user.attributes.password, function (err, result) {
+                    if (result) {
+                        const payload = { id: user.id };
+                        const token = jwt.sign(payload, JWT_KEY)
+                        return res.status(200).json({ token });
+                    } else {
+                        return res.status(403).json({ message: 'Invalid username or password', success: false });
+                    }
+                });
+            }
+            else {
+                return res.status(403).json({ message: 'Invalid username or password', success: false });
+            }
+        });
 });
 
 //end point for profile info

@@ -23,7 +23,7 @@ const Profile = () => {
         }).catch(err => {
             console.log(err.response);
         });
-    },[]);
+    }, []);
 
     if (!user) return <h1>Loading...</h1>;
 
@@ -32,8 +32,8 @@ const Profile = () => {
             <h1 className='profile__header'>My Stocks</h1>
             <h1 className='profile__subheader'>{user.name}'s stocks</h1>
             <ul className='profile__list'>
-                {user.symbols.map((symbol, i) => {
-                    return <ProfileItem symbol={symbol} key={symbol}/>
+                {!Array.isArray(user.symbols) ? '' : user.symbols.map(symbol => {
+                    return <ProfileItem symbol={symbol} key={symbol} />
                 })}
             </ul>
         </section>

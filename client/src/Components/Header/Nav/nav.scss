@@ -98,6 +98,7 @@
     width: 2rem;
     height: 2rem;
     z-index: 20;
+    cursor: pointer;
 
     @include desktop{
         display: none;
