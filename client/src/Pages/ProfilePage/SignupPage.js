@@ -54,18 +54,21 @@ function SignupPage(props) {
             <form className="profile-page__form" onSubmit={signup}>
                 <h1 className="profile-page__header">SignUp</h1>
                 {isLoginError && <label className="profile-page__error" >{errorMessage}</label>}
+                <label htmlFor="username" className='profile-page__label'>Username</label>
                 <input
                     type="text"
                     name="username"
                     className='profile-page__input input'
                     placeholder='Enter a username'
                 />
+                <label htmlFor="name" className='profile-page__label'>Name</label>
                 <input
                     type="text"
                     name="name"
                     className='profile-page__input input'
                     placeholder='Enter your name'
                 />
+                <label htmlFor="password" className='profile-page__label'>Password</label>
                 <input
                     type="password"
                     name="password"

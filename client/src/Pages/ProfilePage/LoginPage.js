@@ -56,17 +56,19 @@ function LoginPage(props) {
             <form className="profile-page__form" onSubmit={login}>
                 <h1 className="profile-page__header">Login</h1>
                 {isLoginError && <label className="profile-page__error">{errorMessage}</label>}
+                <label htmlFor="username" className='profile-page__label'>Username</label>
                 <input
                     type="text"
                     name="username"
                     className='profile-page__input input'
-                    placeholder='Username'
+                    placeholder='Enter Username'
                 />
+                <label htmlFor="password" className='profile-page__label'>Password</label>
                 <input
                     type="password"
                     name="password"
                     className='profile-page__input input'
-                    placeholder='Password'
+                    placeholder='Enter Password'
                 />
                 <button className="profile-page__button button" type="submit" >Log In</button>
                 <button className="profile-page__signup" onClick={handleSignupButton}>Sign Up</button>
