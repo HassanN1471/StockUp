@@ -84,7 +84,7 @@
     width: 100vw;
     transition: transform 0.3s ease-in-out;
     &--open{
-        transform: translateX(0);
+        transform: translateX(50%);
     }
 }
 
@@ -132,16 +132,16 @@
     right: -10px;
 
     div {
-        &:nth-child(1) {
-          transform: rotate(45deg);
-        }
-        &:nth-child(2) {
-          transform: translateX(100%);
-          opacity: 0
-        }
-        &:nth-child(3) {
-          transform: rotate(-45deg);
-        }
+      &:nth-child(1) {
+        transform: rotate(45deg);
       }
+      &:nth-child(2) {
+        transform: translateX(100%);
+        opacity: 0
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    }
   }
 }

@@ -1,12 +1,16 @@
 @import '../../Partials/variables';
 
-.add-btn{
+.add{        
     display: flex;
-    width: fit-content;
-    height: fit-content;
-    background-color: transparent;
-    border: none;
-    padding: 0;
+    align-items: center;
+
+    &__btn{
+        width: fit-content;
+        height: fit-content;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
 
     &__icon{
         fill: $primary-green;
@@ -23,5 +27,10 @@
         border: 1px solid $primary-green;
         border-radius: 9px;
         padding: 0.1rem;
+    }
+
+    &__text{
+        margin-left: 0.2rem;
+        color: $primary-green;
     }
 }

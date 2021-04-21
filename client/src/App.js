@@ -6,6 +6,8 @@ import './App.scss';
 import Nav from './Components/Header/header';
 import HomePage from './Pages/HomePage/HomePage';
 import ChangesPage from './Pages/ChangesPage/ChangesPage';
+import LoginPage from "./Pages/ProfilePage/LoginPage";
+import SignupPage from "./Pages/ProfilePage/SignupPage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import DetailsPage from './Pages/DetailsPage/DetailsPage';
 
@@ -17,7 +19,6 @@ function App() {
     const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
     const baseUrl = "http://localhost:8080";
-
     const profileUrl = `${baseUrl}/profile`;
 
     useEffect(() => {
@@ -52,6 +53,12 @@ function App() {
                         />
                         <Route path="/changes"
                             render={(routerProps) => <ChangesPage {...routerProps} />}
+                        />
+                        <Route path="/login"
+                            render={(routerProps) => <LoginPage {...routerProps} />}
+                        />
+                        <Route path="/signup"
+                            render={(routerProps) => <SignupPage {...routerProps} />}
                         />
                         <Route path="/profile"
                             render={(routerProps) => <ProfilePage {...routerProps} />}

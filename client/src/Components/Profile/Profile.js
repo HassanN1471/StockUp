@@ -23,18 +23,24 @@ const Profile = () => {
         }).catch(err => {
             console.log(err.response);
         });
-    }, []);
+    }, [setUser, user]);
 
     if (!user) return <h1>Loading...</h1>;
 
     return (
         <section className='profile'>
             <h1 className='profile__header'>My Stocks</h1>
-            <h1 className='profile__subheader'>{user.name}'s stocks</h1>
+            {(Array.isArray(user.symbols) || user.symbols.length)
+                ? <h1 className='profile__subheader'>{user.name}'s stocks</h1>
+                : <p className='profile__subheader'>No saved stocks</p>
+            }
             <ul className='profile__list'>
-                {!Array.isArray(user.symbols) ? '' : user.symbols.map(symbol => {
-                    return <ProfileItem symbol={symbol} key={symbol} />
-                })}
+                {(Array.isArray(user.symbols) || user.symbols.length)
+                    ? user.symbols.map(symbol => {
+                        return <ProfileItem symbol={symbol} key={symbol} />
+                    })
+                    : ''
+                }
             </ul>
         </section>
     );

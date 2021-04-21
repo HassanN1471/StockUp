@@ -37,8 +37,8 @@ router.put('/profile/addsymbol', (req, res) => {
                 updateSymbols.push(symbol);
                 user.save({
                     name: user.attributes.name,
-                    username: user.attributes.name,
-                    password: user.attributes.name,
+                    username: user.attributes.username,
+                    password: user.attributes.password,
                     symbols: JSON.stringify(updateSymbols)
                 });
                 return res.json({ name: user.attributes.name, symbols: updateSymbols })
@@ -64,8 +64,8 @@ router.put('/profile/deletesymbol', (req, res) => {
                     .filter(el => el !== symbol)
                 user.save({
                     name: user.attributes.name,
-                    username: user.attributes.name,
-                    password: user.attributes.name,
+                    username: user.attributes.username,
+                    password: user.attributes.password,
                     symbols: JSON.stringify(updateSymbols)
                 });
                 return res.json({ name: user.attributes.name, symbols: updateSymbols })
