@@ -7,10 +7,9 @@ const Graph = (props) => {
 
     let ohlc = [],
         volume = [],
-        dataLength = data.length,
-        groupingUnits = [["day", [1]]], i = 0;
+        dataLength = data.length;
 
-    for (i; i < dataLength; i += 1) {
+    for (let i = 0 ; i < dataLength; i += 1) {
         ohlc.push([
             data[i][0], //date
             data[i][1], //open
@@ -106,18 +105,12 @@ const Graph = (props) => {
                 type: "candlestick",
                 name: props.data.symbol,
                 data: ohlc,
-                dataGrouping: {
-                    units: groupingUnits
-                }
             },
             {
                 type: "column",
                 name: "Volume",
                 data: volume,
                 yAxis: 1,
-                dataGrouping: {
-                    units: groupingUnits
-                }
             }
         ]
     };
