@@ -29,11 +29,14 @@ function AddSymbol(props) {
                 // setUser(null);
             });
     }
-    if(user && user.symbols.find(symbol=>symbol===props.symbol)) return <p className='add-btn__added'>ADDED</p>;
+    if (user && user.symbols.find(symbol => symbol === props.symbol)) return <p className='add__added'>ADDED</p>;
     return (
-        <button className='add-btn' onClick={addHandler}>
-            <AddIcon className='add-btn__icon'  />
-        </button>
+        <div className='add'>
+            <button className='add__btn' onClick={addHandler}>
+                <AddIcon className='add__icon' />
+            </button>
+            <p className='add__text'>ADD</p>
+        </div>
     );
 }
 

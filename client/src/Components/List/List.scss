@@ -37,6 +37,7 @@
     &__input-container{
         @include setup-flex(column,nowrap);
         width: 100%;
+        margin: 0 0.5rem;
     }
 
     &__input{
@@ -64,6 +65,7 @@
         border: $border-value;
         padding-bottom: 0.5rem;
         margin: 1rem 0;
+        overflow: hidden;
 
         &__even{
             background-color: $secondary-white;
@@ -84,14 +86,30 @@
         &__box{
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: center;
             width: 100%;
             padding: 0.5rem 1rem;
         }
 
+        &__left{
+            display: flex;
+            align-items: center;
+        }
+
+        &__icon{
+
+            &--pos{
+                fill: $primary-green;
+            }
+
+            &--neg{
+                fill: $primary-red;
+            }
+        }
+
         &__change{
             text-align: right;
-            min-width: 4rem;
+            min-width: 3.5rem;
 
             &--pos{
                 color: $primary-green;

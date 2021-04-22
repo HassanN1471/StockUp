@@ -40,6 +40,10 @@ main{
 
 .input{
     @include input;
+    &:focus{
+        border: 2px solid $secondary-color;
+        box-shadow: $box-shadow-value;
+    }
 }
 
 .label{
