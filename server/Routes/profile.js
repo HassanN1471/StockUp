@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 const User = require('../models/user');
+const { URL, TOKEN } = require('../Utils/urlAPI');
 
 // A Profile end-point that will return user information,
 // The authorize middleware function must check for
@@ -8,7 +10,7 @@ const User = require('../models/user');
 // the token and put the decoded data onto req.decoded
 router.get('/profile', (req, res) => {
     const data = req.decoded;
-    console.log("id", data.id);
+    //console.log("id", data.id);
     //fetch user from database
     User
         .where({ id: data.id })
@@ -16,6 +18,37 @@ router.get('/profile', (req, res) => {
         .then(user => {
             if (user) {
                 return res.json({ name: user.attributes.name, symbols: JSON.parse(user.attributes.symbols) })
+            }
+            else {
+                return res.status(404).json({ message: 'User not found.' });
+            }
+        })
+});
+
+router.get('/profile/changes', (req, res) => {
+    const data = req.decoded;
+    //console.log("id", data.id);
+    User
+        .where({ id: data.id })
+        .fetch()
+        .then(user => {
+            if (user) {
+                const symbolsString = `${user.attributes.symbols}`.split('[]').join("");
+                const url = `${URL}/stable/stock/market/batch?types=previous,price&symbols=${symbolsString}&token=${TOKEN}`
+                axios.get(url)
+                    .then(({ data }) => {
+                        //refromat data
+                        const symbolsData = Object.keys(data).map(item => {
+                            const reformData = ((data[item].price - data[item].previous.close) / data[item].previous.close * 100).toFixed(2);
+                            return { symbol: item, change: reformData }
+                        });
+                        console.log(symbolsData);
+                        // return res.json({ name: user.attributes.name, symbols: JSON.parse(user.attributes.symbols) })
+                        return res.json(symbolsData);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             }
             else {
                 return res.status(404).json({ message: 'User not found.' });

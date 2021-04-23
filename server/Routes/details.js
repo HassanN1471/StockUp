@@ -3,12 +3,12 @@ const router = express.Router();
 const axios = require('axios');
 
 //const API_TOKEN = process.env.API_TOKEN;
-const API_TOKEN_SANDBOX = process.env.API_TOKEN_SANDBOX;
-//const API_TOKEN_SANDBOX = process.env.API_TOKEN;
+//const API_TOKEN_SANDBOX = process.env.API_TOKEN_SANDBOX;
+const API_TOKEN_SANDBOX = process.env.API_TOKEN;
 
 //const API_URL = 'https://cloud.iexapis.com';
-const API_URL_SANDBOX = 'https://sandbox.iexapis.com';
-//const API_URL_SANDBOX = 'https://cloud.iexapis.com';
+//const API_URL_SANDBOX = 'https://sandbox.iexapis.com';
+const API_URL_SANDBOX = 'https://cloud.iexapis.com';
 
 router.get('/details/:id', (req, res) => {
     //console.log(req.params.id);
