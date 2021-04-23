@@ -9,7 +9,7 @@ function authorize(req, res, next) {
     // If the token is not provided, or invalid, then
     // this function should not continue on to the
     // end-point.
-    console.log(req.headers.authorization);
+    //console.log(req.headers.authorization);
     const tokenString = req.headers.authorization;
     const token = tokenString ? tokenString.split(' ')[1] : '';
     if (token.length > 0) {
