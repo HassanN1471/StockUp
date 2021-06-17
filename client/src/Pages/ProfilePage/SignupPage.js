@@ -3,15 +3,13 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../../Components/UserContext/UserContext';
 import axios from 'axios';
 import './ProfilePage.scss';
+import {signupUrl} from "../../URL";
 
 //display sign up screen
 function SignupPage(props) {
     const { user } = useContext(UserContext);
     const [isLoginError, setIsLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
-    const baseUrl = "http://localhost:8080";
-    const signupUrl = `${baseUrl}/signup`;
 
     const handleBackButton = (e) => {
         e.preventDefault();
@@ -47,7 +45,7 @@ function SignupPage(props) {
             })
     };
 
-    if (sessionStorage.getItem("authToken") && user) return <Redirect to='/profile' />;
+    if (localStorage.getItem("authToken") && user) return <Redirect to='/profile' />;
 
     return (
         <main className="profile-page">

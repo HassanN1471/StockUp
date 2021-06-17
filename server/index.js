@@ -70,7 +70,7 @@ app.post('/login', (req, res) => {
 });
 
 //end point for profile info
-app.use('/', authorize, profileRoutes)
+app.use('/',  profileRoutes)
 
 //end point for stock details
 app.use('/', authorize, listRoutes);

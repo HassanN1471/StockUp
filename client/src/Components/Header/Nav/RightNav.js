@@ -8,7 +8,7 @@ const RightNav = ({ open, setOpen }) => {
     const handleLogout = () => {
         handleOpen();
         setUser(null);
-        sessionStorage.removeItem("authToken");
+        localStorage.removeItem("authToken");
     };
     const handleOpen = () => {
         setOpen(!open);

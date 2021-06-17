@@ -7,7 +7,7 @@ import {Redirect} from 'react-router-dom';
 function ProfilePage() {
     const { user } = useContext(UserContext);
 
-    if (!sessionStorage.getItem("authToken") && !user) return <Redirect to='/login'/>;
+    if (!localStorage.getItem("authToken") && !user) return <Redirect to='/login'/>;
 
     return (
         <main className="profile-page">

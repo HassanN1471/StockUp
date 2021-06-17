@@ -3,7 +3,7 @@ import axios from 'axios';
 import ListItem from './ListItem';
 import { filterData } from '../../Utils';
 import './List.scss';
-
+import {listUrl} from "../../URL";
 
 class List extends Component {
 
@@ -20,13 +20,13 @@ class List extends Component {
         if(this.state.symbolsEmpty) return;
         const symbolsString = `${symbols}`.split('[]').join("");
         console.log(symbolsString);
-        axios.post(`http://localhost:8080/list`, {
+        axios.post(`${listUrl}`, {
             symbols: symbolsString,
             interval: this.state.interval
         }, {
             headers: {
                 // here grab token from localStorage
-                authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+                authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
         }).then(({ data }) => {
             //filter change values based on change state value

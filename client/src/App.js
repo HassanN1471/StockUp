@@ -10,7 +10,7 @@ import LoginPage from "./Pages/ProfilePage/LoginPage";
 import SignupPage from "./Pages/ProfilePage/SignupPage";
 import ProfilePage from "./Pages/ProfilePage/ProfilePage";
 import DetailsPage from './Pages/DetailsPage/DetailsPage';
-
+import {profileUrl} from "./URL";
 import { UserContext } from './Components/UserContext/UserContext';
 
 function App() {
@@ -18,28 +18,25 @@ function App() {
 
     const value = useMemo(() => ({ user, setUser }), [user, setUser])
 
-    const baseUrl = "http://localhost:8080";
-    const profileUrl = `${baseUrl}/profile`;
-
     useEffect(() => {
-        const loggedInUser = sessionStorage.getItem("authToken");
+        const loggedInUser = localStorage.getItem("authToken");
         console.log(loggedInUser);
         if (loggedInUser) {
             axios.get(profileUrl, {
                 headers: {
                     // here grab token from localStorage
-                    authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+                    authorization: `Bearer ${localStorage.getItem("authToken")}`
                 }
             }).then(res => {
                 console.log(res);
                 setUser(res.data)
             }).catch(err => {
                 console.log(err.response);
-                sessionStorage.removeItem("authToken");
+                localStorage.removeItem("authToken");
                 setUser(null);
             });
         }
-    }, [profileUrl]);
+    }, []);
 
     return (
 

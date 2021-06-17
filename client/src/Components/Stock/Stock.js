@@ -4,6 +4,7 @@ import Graph from '../Graph/Graph';
 import StockInfo from '../Stock/StockInfo';
 import { toTimestamp } from '../../Utils';
 import './Stock.scss';
+import {detailsUrl} from "../../URL";
 
 function Stock(props) {
     const [data, setData] = useState(null);
@@ -14,7 +15,7 @@ function Stock(props) {
 
     //get request for graph data
     const getData = (id) => {
-        axios.get(`http://localhost:8080/details/${id}`)
+        axios.get(`${detailsUrl}/${id}`)
             .then(({ data }) => {
                 const dataobj = data.pop()
                 dataobj.data = dataobj.data.map(item => ([

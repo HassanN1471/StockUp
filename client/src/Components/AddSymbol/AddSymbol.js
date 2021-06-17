@@ -3,13 +3,10 @@ import { UserContext } from '../UserContext/UserContext';
 import axios from 'axios';
 import { ReactComponent as AddIcon } from '../../Assets/svg/add_icon.svg';
 import './AddSymbol.scss';
+import {AddSymbolUrl} from "../../URL";
 
 function AddSymbol(props) {
     const { user, setUser } = useContext(UserContext);
-
-    const baseUrl = "http://localhost:8080";
-    const profileUrl = `${baseUrl}/profile`;
-    const AddSymbolUrl = `${profileUrl}/addsymbol`;
 
     const addHandler = () => {
         axios.put(AddSymbolUrl, {
@@ -18,7 +15,7 @@ function AddSymbol(props) {
             {
                 headers: {
                     // here grab token from localStorage
-                    authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+                    authorization: `Bearer ${localStorage.getItem("authToken")}`
                 }
             }).then(res => {
                 console.log(res);
