@@ -17,7 +17,7 @@ const Nav = () => {
 
     const handleLogout = () => {
         setUser(null);
-        sessionStorage.removeItem("authToken");
+        localStorage.removeItem("authToken");
     };
 
     return (

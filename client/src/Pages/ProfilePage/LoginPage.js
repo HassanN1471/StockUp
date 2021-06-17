@@ -3,15 +3,13 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../../Components/UserContext/UserContext';
 import axios from 'axios';
 import './ProfilePage.scss';
+import {loginUrl} from "../../URL";
 
 //display login screen
 function LoginPage(props) {
     const { user } = useContext(UserContext);
     const [isLoginError, setIsLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-
-    const baseUrl = "http://localhost:8080";
-    const loginUrl = `${baseUrl}/login`;
 
     const handleSignupButton = (e) => {
         e.preventDefault();
@@ -36,7 +34,7 @@ function LoginPage(props) {
             .then(res => {
                 //successful login = res.data.token is populated
                 console.log(res);
-                sessionStorage.setItem('authToken', res.data.token);
+                localStorage.setItem('authToken', res.data.token);
                 setIsLoginError(false);
                 props.history.push('/profile')
             })
@@ -49,10 +47,11 @@ function LoginPage(props) {
             })
     };
 
-    if (sessionStorage.getItem("authToken") && user) return <Redirect to='/profile' />;
+    if (localStorage.getItem("authToken") && user) return <Redirect to='/profile' />;
 
     return (
         <main className="profile-page">
+            {console.log(loginUrl)}
             <form className="profile-page__form" onSubmit={login}>
                 <h1 className="profile-page__header">Login</h1>
                 {isLoginError && <label className="profile-page__error">{errorMessage}</label>}

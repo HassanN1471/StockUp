@@ -1,0 +1,10 @@
+export const baseUrl = process.env.REACT_APP_API_URL;
+export const profileUrl = `${baseUrl}/profile`;
+export const profileChangesUrl = `${profileUrl}/changes`;
+export const AddSymbolUrl = `${profileUrl}/addsymbol`;
+export const DeleteSymbolUrl = `${profileUrl}/deletesymbol`;
+export const listUrl = `${baseUrl}/list`;
+export const loginUrl = `${baseUrl}/login`;
+export const signupUrl = `${baseUrl}/signup`;
+export const detailsUrl = `${baseUrl}/details`;
+export const detailsStatsUrl = `${detailsUrl}/stats`;

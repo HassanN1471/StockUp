@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddSymbol from '../AddSymbol/AddSymbol';
-
+import {detailsStatsUrl} from "../../URL"
 function StockInfo(props) {
     const [data, setData] = useState(null);
 
@@ -11,7 +11,7 @@ function StockInfo(props) {
 
     //get request for stock stats info
     const getData = (id) => {
-        axios.get(`http://localhost:8080/details/stats/${id}`)
+        axios.get(`${detailsStatsUrl}/${id}`)
             .then(({ data }) => {
                 setData(data);
                 console.log(data);

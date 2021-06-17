@@ -3,10 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from '../UserContext/UserContext';
 import ProfileItem from './ProfileItems';
 import './Profile.scss';
-
-const baseUrl = "http://localhost:8080";
-const profileUrl = `${baseUrl}/profile`;
-const profileChangesUrl = `${profileUrl}/changes`;
+import {profileUrl, profileChangesUrl} from "../../URL";
 
 const Profile = () => {
     const [symbols, setSymbols] = useState(null);
@@ -17,29 +14,29 @@ const Profile = () => {
         axios.get(profileUrl, {
             headers: {
                 // here grab token from localStorage
-                authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+                authorization: `Bearer ${localStorage.getItem("authToken")}`
             }
-        }).then(res => {
-            console.log(res);
-            setUser(res.data)
+        }).then(({ data }) => {
+            console.log(data);
+            setUser(data)
         }).catch(err => {
             console.log(err.response);
         });
     }, [setUser, user]);
 
     useEffect(() => {
-        axios.get(profileChangesUrl, {
-            headers: {
-                // here grab token from localStorage
-                authorization: `Bearer ${sessionStorage.getItem("authToken")}`
-            }
-        }).then(({ data }) => {
-            console.log(data);
-            setSymbols(data)
-        }).catch(err => {
-            console.log(err.response);
-        });
-    }, []);
+        if (user) {
+            console.log(user.symbols);
+            axios.put(profileChangesUrl, {
+                symbols: user.symbols
+            }).then(({ data }) => {
+                console.log(data);
+                setSymbols(data)
+            }).catch(err => {
+                console.log(err.response);
+            });
+        }
+    }, [user]);
 
     if (!user) return <h1>Loading...</h1>;
 
@@ -51,12 +48,12 @@ const Profile = () => {
                 : <h1 className='profile__subheader'>{user.name}'s stocks</h1>
             }
             <div className='profile__container'>
-            <ul className='profile__list'>
-                {(!symbols) ? console.log('herey') : console.log('symbols', symbols)}
-                {(!symbols) ? '' : symbols.map(el => {
-                    return <ProfileItem symbol={el.symbol} change={el.change} key={el.symbol} />
-                })}
-            </ul>
+                <ul className='profile__list'>
+                    {(!symbols) ? console.log('herey') : console.log('symbols', symbols)}
+                    {(!symbols) ? '' : symbols.map(el => {
+                        return <ProfileItem symbol={el.symbol} change={el.change} key={el.symbol} />
+                    })}
+                </ul>
             </div>
         </section>
     );

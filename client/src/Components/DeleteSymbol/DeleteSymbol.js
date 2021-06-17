@@ -1,15 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../UserContext/UserContext';
 import axios from 'axios';
 import { ReactComponent as DeleteIcon } from '../../Assets/svg/delete_icon.svg';
 import './DeleteSymbol.scss';
-
+import {DeleteSymbolUrl} from "../../URL";
 function DeleteSymbol(props) {
-    const { setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
-    const baseUrl = "http://localhost:8080";
-    const profileUrl = `${baseUrl}/profile`;
-    const DeleteSymbolUrl = `${profileUrl}/deletesymbol`;
+    useEffect(()=>{
+        console.log(user);
+    },[user]);
 
     const deleteHandler = () => {
         console.log(props.symbol);
@@ -19,11 +19,11 @@ function DeleteSymbol(props) {
             {
                 headers: {
                     // here grab token from localStorage
-                    authorization: `Bearer ${sessionStorage.getItem("authToken")}`
+                    authorization: `Bearer ${localStorage.getItem("authToken")}`
                 }
-            }).then(res => {
-                console.log(res);
-                setUser(res.data)
+            }).then(({data}) => {
+                console.log(data);
+                setUser(data);
             }).catch(err => {
                 console.log(err.response);
                 // sessionStorage.removeItem("authToken");
