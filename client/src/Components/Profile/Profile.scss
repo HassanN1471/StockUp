@@ -55,6 +55,18 @@
     }
 
     &__bottom{
+        @include setup-flex(column, nowrap);
+        width: 100%;
+        padding: 0 0.5rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__label{
+        @include label;
+    }
+
+    &__box{
         display: flex;
         justify-content: center;
         align-items: center;

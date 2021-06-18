@@ -17,8 +17,11 @@ function ProfileItems(props) {
             </div>
             {(change)
                 ? <div className='profile__bottom'>
-                    {(change > 0) ? <UpIcon className='profile__icon--pos' /> : <DownIcon className='profile__icon--neg' />}
-                    <p className={`profile__change ${(change > 0) ? 'profile__change--pos' : 'profile__change--neg'}`}>{change}%</p>
+                    <p className='profile__label'>Change %</p>
+                    <div className='profile__box'>
+                        {(change > 0) ? <UpIcon className='profile__icon--pos' /> : <DownIcon className='profile__icon--neg' />}
+                        <p className={`profile__change ${(change > 0) ? 'profile__change--pos' : 'profile__change--neg'}`}>{change}%</p>
+                    </div>
                 </div>
                 : ''
             }
