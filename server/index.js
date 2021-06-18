@@ -4,11 +4,14 @@ const PORT = process.env.PORT || process.argv[2] || 8080;
 const jwt = require("jsonwebtoken");
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-
+const morgan = require('morgan');
 const User = require('./models/user');
 
-app.use(express.json());
+const isProd = process.env.NODE_ENV === 'production';
+
 app.use(cors());
+app.use(morgan(isProd ? 'combined' : 'dev'));
+app.use(express.json());
 
 require('dotenv').config();
 
@@ -70,7 +73,7 @@ app.post('/login', (req, res) => {
 });
 
 //end point for profile info
-app.use('/',  profileRoutes)
+app.use('/', profileRoutes)
 
 //end point for stock details
 app.use('/', authorize, listRoutes);
