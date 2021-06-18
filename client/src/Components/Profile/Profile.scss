@@ -55,6 +55,19 @@
     }
 
     &__bottom{
+        @include setup-flex(column, nowrap);
+        width: 100%;
+        padding: 0 0.5rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__label{
+        @include label;
+        font-size: 0.75rem;
+    }
+
+    &__box{
         display: flex;
         justify-content: center;
         align-items: center;
